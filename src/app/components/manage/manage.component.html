@@ -1,0 +1,48 @@
+<!-- Any CSS class that starts with mdl- is part of the styles provided by Material Design Lite’s grid and UI library -->
+<div class="demo-grid-1 mdl-grid">
+  <div class="mdl-cell mdl-cell--4-col"></div>
+  <div class="mdl-cell mdl-cell--4-col">
+    <!-- Binds the submit event to call the add method, '(submit)' attribute is a way to add an event listener, known as an event binding -->
+    <!-- When the form is submitted (which is done by pressing Enter), it will call the add() method. -->
+    <!-- Any attribute that’s surrounded by parentheses is an event binding (in this case, is 'submit' event), -->
+    <!-- and the name of the event should match the event without the on (onsubmit is submit) -->
+    <!-- [(ngModel)] attribute is a two-way binding that will sync the value of the input -->
+    <!-- and the value of the property in the controller anytime it changes from either location -->
+    <!-- This way, as the user types into the text field, the value will be immediately available for the controller to consume. -->
+    <!-- When the user hits Enter, the submit event fires and will use the value of the stock property when adding the new symbol -->
+    <form style="margin-bottom: 5px" (submit)="add()">
+      <input
+        name="stock"
+        [(ngModel)]="stock"
+        class="mdl-textfield__input"
+        type="text"
+        placeholder="Add Stock"
+      />
+    </form>
+    <table
+      class="mdl-data-table mdl-data-table--selectable mdl-shadow--2dp"
+      style="width: 100%"
+    >
+      <tbody>
+        <!-- Loops over symbols list with NgFor -->
+        <!-- For each symbol, it will create a local variable called symbol, create a new table row that binds the value, -->
+        <!-- and a button that’s for removing the item (the local variable 'symbol' will be passed to the controller for removing stock) -->
+        <tr *ngFor="let symbol of symbols">
+          <!-- Displays the symbol -->
+          <td class="mdl-data-table__cell--non-numeric">{{ symbol }}</td>
+          <td style="padding-top: 6px">
+            <!-- Binds the click event on the button to call the remove method -->
+            <!-- similar to the submit event, but this event passes along the symbol -->
+            <!-- Because there are multiple instances of the button, each one passes along the local variable to know which symbol to remove -->
+            <button class="mdl-button" (click)="remove(symbol)">Remove</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="mdl-cell mdl-cell--4-col"></div>
+</div>
+
+<!-- Now update the app.component.html file and change the content of the main element by using app-manage selector (in the controller) -->
+<!-- We also need to add the FormsModule to the App module (at import session and imports property), 
+because we are going to use the form features that aren’t automatically included by Angular -->

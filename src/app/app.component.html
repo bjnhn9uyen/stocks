@@ -1,0 +1,39 @@
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout-title">Stock Tracker</span>
+      <div class="mdl-layout-spacer"></div>
+      <!-- The RouterLink directive binds to an array of paths that are used to build a URL. -->
+      <!-- The RouterLink directive parses the array and tries to match to a known route. -->
+      <!-- Once it matches a route, it will add an href to the anchor tag that correctly links to that route. -->
+      <nav class="mdl-navigation mdl-layout--large-screen-only">
+        <a class="mdl-navigation__link" [routerLink]="['/']">Dashboard</a>
+        <a class="mdl-navigation__link" [routerLink]="['/manage']">Manage</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- display single card -->
+  <!-- *ngIf="stocks" is a directive that will only render the contents inside the element when the expression is true. -->
+  <!-- In this case, it won’t render the Summary component until the stock data has been loaded -->
+  <!-- This is an instantiation of a single Summary component, and the first value of the stocks array is bound into the stock property -->
+  <!-- The data returns as an array, so we’re directly accessing the first value -->
+  <!-- <main class="mdl-layout__content" style="padding: 20px;" *ngIf="stocks">
+    <app-summary [stock]="stocks[0]"></app-summary>
+  </main> -->
+
+  <main class="mdl-layout__content" style="padding: 20px;">
+    <!-- <app-dashboard></app-dashboard> -->
+    <!-- <app-manage></app-manage> -->
+    <router-outlet></router-outlet>
+  </main>
+</div>
+
+<!-- <h1>
+  {{ title }}
+</h1> -->
+<!-- There’s the title property defined between double curly braces {{}}. This is a common convention for how to bind a value into a template.
+Angular will replace {{title}} with the value of the title property from app.component.ts 
+This is called 'interpolation' and is frequently used to display data in a template. 
+The content between the braces is called an Angular expression, and is evaluated against the controller (.ts file),
+meaning that it will try to find a property on the controller to display -->

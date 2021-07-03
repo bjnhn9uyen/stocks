@@ -1,0 +1,19 @@
+<!-- The template has some CSS classes to use the Material Design Lite UI framework for a grid structure -->
+<div class="mdl-grid">
+  <!-- Use *ngIf to show a loading message until stocks have loaded. -->
+  <div
+    class="mdl-cell mdl-cell--12-col"
+    *ngIf="!stocks"
+    style="text-align: center"
+  >
+    Loading
+  </div>
+  <!-- Use *ngFor to loop over each stock and expose a local variable [stock] by the name of "stock" (will be used in summary.component.ts)-->
+  <div class="mdl-cell mdl-cell--3-col" *ngFor="let stock of stocks">
+    <!-- Instantiate a Summary component for each stock and pass that stock data to local variable 'stock' in summary.component.ts -->
+    <app-summary [stock]="stock"></app-summary>
+  </div>
+</div>
+
+<!-- Now replace the single card (of first value of the stocks array) in the app.component.html with this list of stocks 
+by using <app-dashboard> selector (in the dashboard controller) -->

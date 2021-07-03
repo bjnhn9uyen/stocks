@@ -1,0 +1,32 @@
+<!-- Uses NgClass directive to help toggle background color -->
+<!-- [ngClass] is a special kind of attribute of the div element called a directive -->
+<!-- Directives allow you to modify the behavior and display of DOM elements in a template. -->
+<!-- Directives make it possible to add some conditional logic or otherwise modify the way the template behaves or is rendered -->
+<!-- The NgClass directive is able to add or remove CSS classes to and from the element -->
+<!-- 'increase' and 'decrease' are the CSS class names, isPositive() and isNegative() method on the controller -->
+<!-- In this case, the card will get the 'increase' CSS class when it’s positive, or the 'decrease' CSS class when it’s negative -->
+<div
+  class="mdl-card stock-card mdl-shadow--2dp"
+  [ngClass]="{ increase: isPositive(), decrease: isNegative() }"
+  style="width: 100%"
+>
+  <span>
+    <div class="mdl-card__title">
+      <h4 style="color: #fff; margin: 0">
+        <!-- Displays the symbol value and converts to uppercase, 'stock?' means the controller is expected to have a property called 'stock' -->
+        <!-- If it fails, normally it will throw an error, 
+        but the safe navigation operator ?. will silently fail and not display anything if the property is missing. -->
+        {{ stock?.symbol?.toUpperCase() }}<br />
+        <!-- Displays last price and formats it as currency -->
+        <!-- To format the output, a pipe symbol | are added directly into the expression, 
+        and then a pipe is named and optionally configured with values separated with the colon : symbol.
+        Pipes only modify the data before it is displayed, and do not change the value in the controller (.ts file) -->
+        {{ stock?.lastTradePriceOnly | currency: "USD":"symbol":".2" }}<br />
+        <!-- Displays the day’s change as currency and as percent -->
+        {{ stock?.change | currency: "USD":"symbol":".2" }} ({{
+          stock?.changeInPercent | percent: ".2"
+        }})
+      </h4>
+    </div>
+  </span>
+</div>
